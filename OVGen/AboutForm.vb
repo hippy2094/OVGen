@@ -1,4 +1,4 @@
-﻿Public Class AboutForm
+Public Class AboutForm
 
     Private Sub AboutForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LabelVersion.Text = Application.ProductVersion

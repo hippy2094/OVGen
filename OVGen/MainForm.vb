@@ -1,4 +1,4 @@
-﻿Imports Microsoft.WindowsAPICodePack.Taskbar
+Imports Microsoft.WindowsAPICodePack.Taskbar
 Public Class MainForm
     Property isRunningMono As Boolean
     Dim configFileLocation As String = Environment.CurrentDirectory & "\OVG.ini"

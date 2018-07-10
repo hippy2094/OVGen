@@ -1,4 +1,4 @@
-﻿Public Class ChannelConfigForm
+Public Class ChannelConfigForm
     Public Property Options As New channelOptions
     Public Property SetAll As Boolean = False
     Dim globalOptions As New channelOptions
