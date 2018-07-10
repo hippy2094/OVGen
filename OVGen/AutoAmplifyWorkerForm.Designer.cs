@@ -9,7 +9,7 @@ using System.Collections;
 using System;
 using System.Xml.Linq;
 
-[global::Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
+
 partial class AutoAmplifyWorkerForm : System.Windows.Forms.Form
 {
 
@@ -67,7 +67,7 @@ partial class AutoAmplifyWorkerForm : System.Windows.Forms.Form
         // 
         // AutoAmplifyWorkerForm
         // 
-        this.AutoScaleDimensions = new System.Drawing.SizeF(8.0!, 15.0!);
+        this.AutoScaleDimensions = new System.Drawing.SizeF(8.0f, 15.0f);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.CancelButton = this.ButtonCancel;
         this.ClientSize = new System.Drawing.Size(232, 77);

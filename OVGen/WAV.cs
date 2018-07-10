@@ -13,7 +13,7 @@ public class WAV
     public UInt16 bitDepth;
     public UInt32 sampleLength;
     public UInt32 totalSamples;
-    public object extraArguments;
+    public channelOptions extraArguments;
     public float amplify = 1;
     public uint limit = 0;
     public bool mixChannel = true;

@@ -9,7 +9,7 @@ using System.Collections;
 using System;
 using System.Xml.Linq;
 
-[global::Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
+
 partial class CustomCommandLineForm : System.Windows.Forms.Form
 {
 
@@ -147,7 +147,7 @@ partial class CustomCommandLineForm : System.Windows.Forms.Form
         // 
         // CustomCommandLineForm
         // 
-        this.AutoScaleDimensions = new System.Drawing.SizeF(6.0!, 12.0!);
+        this.AutoScaleDimensions = new System.Drawing.SizeF(6.0f, 12.0f);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.ClientSize = new System.Drawing.Size(594, 171);
         this.Controls.Add(this.ButtonDefault);

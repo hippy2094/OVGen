@@ -9,7 +9,7 @@ using System.Collections;
 using System;
 using System.Xml.Linq;
 
-[global::Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
+
 partial class MainForm : System.Windows.Forms.Form
 {
 
@@ -701,7 +701,7 @@ partial class MainForm : System.Windows.Forms.Form
         // 
         // MainForm
         // 
-        this.AutoScaleDimensions = new System.Drawing.SizeF(8.0!, 15.0!);
+        this.AutoScaleDimensions = new System.Drawing.SizeF(8.0f, 15.0f);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.ClientSize = new System.Drawing.Size(1098, 665);
         this.Controls.Add(this.TabControlRenderingFiles);
