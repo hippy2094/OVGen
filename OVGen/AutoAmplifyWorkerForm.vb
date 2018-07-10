@@ -1,4 +1,4 @@
-﻿Imports System.ComponentModel
+Imports System.ComponentModel
 
 Public Class AutoAmplifyWorkerForm
     Public Property Filename As String

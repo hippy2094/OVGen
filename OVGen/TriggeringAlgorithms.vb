@@ -1,4 +1,4 @@
-﻿Module TriggeringAlgorithms
+Module TriggeringAlgorithms
     Public ReadOnly Algorithms As String() = {"Rising Edge",
                                               "Peak Speed",
                                               "Max Length",

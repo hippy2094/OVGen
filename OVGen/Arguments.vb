@@ -1,4 +1,4 @@
-﻿
+
 Public Class Progress
     Public CurrentFrame As ULong
     Public TotalFrame As ULong

@@ -1,4 +1,4 @@
-﻿# Oscilloscope View Generator
+# Oscilloscope View Generator
 
 A software you can put WAV files and make oscilloscope view thing.
 

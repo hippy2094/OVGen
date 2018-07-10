@@ -1,4 +1,4 @@
-﻿Imports System.Text
+Imports System.Text
 Imports System
 
 Public Class WAV

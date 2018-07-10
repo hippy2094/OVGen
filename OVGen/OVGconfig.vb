@@ -1,4 +1,4 @@
-﻿<Serializable()> Public Class OVGconfig
+<Serializable()> Public Class OVGconfig
     Public General As GeneralSection
     Public FFmpeg As FFmpegSection
     Sub New()

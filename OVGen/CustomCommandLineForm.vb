@@ -1,4 +1,4 @@
-﻿Public Class CustomCommandLineForm
+Public Class CustomCommandLineForm
 
     Private Sub CustomCommandLineForm_HelpButtonClicked(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles Me.HelpButtonClicked
         MsgBox("If you messed up something, press [Default] button.")
