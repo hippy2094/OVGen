@@ -10,7 +10,6 @@ static class TriggeringAlgorithms
     public const byte UseMaxRectifiedAreaScanning = 3;
     public static long risingEdgeTrigger(ref WAV wave, int triggerValue, long offset, long maxScanLength)
     {
-        channelOptions args = wave.extraArguments;
         long risingEdgeTrigger = 0;
         while (Math.Floor(wave.getSample(offset + risingEdgeTrigger, true)) > triggerValue & risingEdgeTrigger < maxScanLength) // postive
             risingEdgeTrigger += 1;
@@ -22,7 +21,6 @@ static class TriggeringAlgorithms
     public static long peakSpeedScanning(ref WAV wave, int triggerValue, long offset, long maxScanLength)
     {
         // OPNA2608: scans how fast a peak is reached centers there
-        channelOptions args = wave.extraArguments;
         int REoffset = risingEdgeTrigger(ref wave, triggerValue, offset, maxScanLength);
         offset += REoffset;
         long peakSpeedScanning = 0;
@@ -62,7 +60,6 @@ static class TriggeringAlgorithms
 
     public static long lengthScanning(ref WAV wave, int triggerValue, long offset, long maxScanLength, bool scanPositive, bool scanNegative)
     {
-        channelOptions args = wave.extraArguments;
         long lengthScanning = 0;
         long scanLocation = 0;
         long maxLength = 0;
@@ -94,7 +91,6 @@ static class TriggeringAlgorithms
 
     public static long maxRectifiedArea(ref WAV wave, int triggerValue, long offset, long maxScanLength, bool scanPositive, bool scanNegative)
     {
-        channelOptions args = wave.extraArguments;
         long maxRectifiedArea = 0;
         long scanLocation = 0;
         long totalSample = 0;
