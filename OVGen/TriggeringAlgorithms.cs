@@ -18,42 +18,47 @@ static class TriggeringAlgorithms
         return risingEdgeTrigger;
     }
 
+    /* Finds the largest positive peak and returns the previous triggerValue-crossing.
+     * Ties are broken by the shortest distance between triggerValue and peak.
+     *
+     * Search begins at the first rising edge (zero crossing) after `offset`.
+     */
     public static long peakSpeedScanning(ref WAV wave, int triggerValue, long offset, long maxScanLength)
     {
-        // OPNA2608: scans how fast a peak is reached centers there
         int REoffset = risingEdgeTrigger(ref wave, triggerValue, offset, maxScanLength);
-        offset += REoffset;
 
         // Sample time
         ulong x = 0;
-        ulong zeroCrossingX = 0;    // Positive-slope zero-crossing
+        ulong crossingX = 0;    // Positive-slope triggerValue-crossing
         long retX = 0;
 
         double get(long x) {
-            return Math.Floor(wave.getSample(offset + x, True))
+            return Math.Floor(wave.getSample(offset + REoffset + x, True))
         }
 
         // Distance from zero-crossing
-        ulong deltaX = 0;
+        ulong deltaX;
         ulong shortestDeltaX = maxScanLength;
 
         int peakY = -127;
 
+        // Preconditions:
+        // get(0) is a positive crossing.
+
         while (x < maxScanLength)
         {
             deltaX = 0;
-            zeroCrossingX = x;
+            crossingX = x;
 
             // invariants:
-            // if x != 0, get(x) is a positive zero-crossing.
-            // get(zeroCrossingX) is (usually) a positive zero-crossing.
+            // get(x == crossingX) is a positive crossing.
             // deltaX = 0.
 
             while (get(x) >= triggerValue)
             {
                 // invariants:
                 // get(x) >= 0
-                // deltaX = x - zeroCrossingX
+                // deltaX = x - crossingX
                 // peakY = largest value
 
                 int y = get(x);
@@ -61,12 +66,12 @@ static class TriggeringAlgorithms
                 if (y > peakY)
                 {
                     peakY = y;
-                    retX = zeroCrossingX;
+                    retX = crossingX;
                     shortestDeltaX = deltaX;
                 }
                 else if (y == peakY && deltaX < shortestDeltaX)
                 {
-                    retX = zeroCrossingX;
+                    retX = crossingX;
                     shortestDeltaX = deltaX;
                 }
 
@@ -83,7 +88,7 @@ static class TriggeringAlgorithms
         }
 
     End:
-        return retX + REoffset;
+        return REoffset + retX;
     }
 
     public static long lengthScanning(ref WAV wave, int triggerValue, long offset, long maxScanLength, bool scanPositive, bool scanNegative)
