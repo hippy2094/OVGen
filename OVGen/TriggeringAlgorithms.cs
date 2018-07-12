@@ -23,39 +23,67 @@ static class TriggeringAlgorithms
         // OPNA2608: scans how fast a peak is reached centers there
         int REoffset = risingEdgeTrigger(ref wave, triggerValue, offset, maxScanLength);
         offset += REoffset;
-        long peakSpeedScanning = 0;
-        int peak = -127;
-        ulong distance = 0;
-        ulong shortestDistance = maxScanLength;
-        ulong dy = 0;
-        ulong tempTrigger = 0;
 
-        while (dy < maxScanLength)
-        {
-            distance = 0;
-            tempTrigger = dy;
-            while (Math.Floor(wave.getSample(offset + dy, true)) >= triggerValue & dy < maxScanLength)
-            {
-                int currentSample = Math.Floor(wave.getSample(offset + dy, true));
-                if (currentSample == peak & distance < shortestDistance)
-                {
-                    peakSpeedScanning = tempTrigger;
-                    shortestDistance = distance;
-                }
-                else if (currentSample > peak)
-                {
-                    peak = currentSample;
-                    peakSpeedScanning = tempTrigger;
-                    shortestDistance = distance;
-                }
-                distance += 1;
-                dy += 1;
-            }
-            while (Math.Floor(wave.getSample(offset + dy, true)) < triggerValue & dy < maxScanLength)
-                dy += 1;
+        // Sample time
+        ulong x = 0;
+        ulong zeroCrossingX = 0;    // Positive-slope zero-crossing
+        long retX = 0;
+
+        double get(long x) {
+            return Math.Floor(wave.getSample(offset + x, True))
         }
-        peakSpeedScanning += REoffset;
-        return peakSpeedScanning;
+
+        // Distance from zero-crossing
+        ulong deltaX = 0;
+        ulong shortestDeltaX = maxScanLength;
+
+        int peakY = -127;
+
+        while (x < maxScanLength)
+        {
+            deltaX = 0;
+            zeroCrossingX = x;
+
+            // invariants:
+            // if x != 0, get(x) is a positive zero-crossing.
+            // get(zeroCrossingX) is (usually) a positive zero-crossing.
+            // deltaX = 0.
+
+            while (get(x) >= triggerValue)
+            {
+                // invariants:
+                // get(x) >= 0
+                // deltaX = x - zeroCrossingX
+                // peakY = largest value
+
+                int y = get(x);
+
+                if (y > peakY)
+                {
+                    peakY = y;
+                    retX = zeroCrossingX;
+                    shortestDeltaX = deltaX;
+                }
+                else if (y == peakY && deltaX < shortestDeltaX)
+                {
+                    retX = zeroCrossingX;
+                    shortestDeltaX = deltaX;
+                }
+
+                deltaX += 1;
+                x += 1;
+                if (x >= maxScanLength) goto End;
+            }
+
+            while (get(x) < triggerValue)
+            {
+                x += 1;
+                if (x >= maxScanLength) goto End;
+            }
+        }
+
+    End:
+        return retX + REoffset;
     }
 
     public static long lengthScanning(ref WAV wave, int triggerValue, long offset, long maxScanLength, bool scanPositive, bool scanNegative)
